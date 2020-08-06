@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快递驿站</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.9/lib/index.css">
+    <link rel="stylesheet" type="text/css" href="css/cube.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/resetIndex.css">
+
+    <style>
+        /*修改placeholder*/
+
+        input::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder {
+            color: #BFCBD6;
+        }
+        input:-moz-placeholder,
+        textarea:-moz-placeholder {
+            color: #BFCBD6;
+        }
+        input::-moz-placeholder,
+        textarea::-moz-placeholder {
+            color: #BFCBD6;
+        }
+        input:-ms-input-placeholder,
+        textarea:-ms-input-placeholder {
+            color: #BFCBD6;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: url('img/body_bg.png') no-repeat center center;
+            background-size: 100% 100%;
+        }
+
+        .mainCont_wrap,
+        .mainCont_wrap .van-tabs__wrap {
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .mainCont_wrap{
+            padding-bottom: 30px;
+        }
+        .mar_t30 {
+            margin-top: 0.3rem;
+        }
+
+        .mar_b25 {
+            margin-bottom: 0.38rem;
+        }
+
+        [v-cloak] {
+            display: none !important;
+        }
+
+        /* https://timgsa.baidu.com/timg?image&quality=80&size=bBFCBD69_10000&sec=1591613265153&di=0b340ce5a5fa13dc8836122c363a344f&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Fback_pic%2F05%2F52%2F71%2F755af2f4b6a309b.jpg%2521%2Ffwfh%2F804x1206%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue */
+        body {
+            /* background: url('img/bgjd.jpg') no-repeat center bottom; */
+            /* background-size: 100% 100%; */
+            /* height:100vh; */
+        }
+
+        .guider_form .van-cell:first-child,
+        .guider_form .van-cell:last-child {
+            border-radius: 0.08rem;
+        }
+
+        .guider_form>div {
+            border-radius: 0.08rem;
+        }
+
+        .tg_label.zhushi {
+            text-align: center;
+            color: #48ABF6;
+            letter-spacing: 2px;
+            font-size: 0.13rem;
+            padding: 0.2rem 0;
+
+        }
+
+        .tg_label.zhushi span {
+            display: inline-block;
+            vertical-align: middle;
+            color: #48ABF6;
+        }
+
+        .tg_label.zhushi img {
+            vertical-align: middle;
+            width: 24px;
+        }
+
+        .van-tab--active {
+            color: #53B6FB;
+        }
+
+        .van-tabs__line {
+            width: 112px !important;
+            height: 2px !important;
+            background-color: #53B6FB;
+        }
+
+        .tip_zhuiyi {
+            color: #48ABF6;
+            font-size: 0.12rem;
+            padding: 0.06rem 0;
+            text-align: center;
+        }
+
+        .tip_zhuiyi span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .tip_zhuiyi img {
+            width: 0.16rem;
+        }
+
+        .tg_caption {
+            text-align: center;
+            padding: 0.06rem 0;
+            color: #41B883;
+            /* color: #F24F10; */
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0.5rem;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .confirm_date {
+            background-color: #1989FA;
+        }
+
+        /* cube */
+        .my-title-img {
+            height: 120px;
+            margin-bottom: 16px;
+            background: url('img/jj_icon.png') no-repeat center center;
+            background-size: 30%;
+        }
+
+        .cube-dialog-main {
+            border-radius: 8px;
+        }
+
+        [class*=van-hairline]::after {
+            border: none;
+            border-bottom: 0 solid #ebedf0;
+        }
+
+        .posi_b {
+            margin-top: 20px;
+        }
+
+        .tipPay {
+            font-size: 12px;
+            color: #41B883;
+            padding: 10px 16px;
+            text-align: center;
+        }
+
+        .van-field__left-icon {
+            margin-left: 5px;
+        }
+
+        .guider_form .van-icon {
+            width: 16px;
+            height: 17px;
+            margin-top: 3px;
+        }
+
+        .van-icon.van-icon-user {
+            background: url('img/user.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .van-icon.van-icon-phone2 {
+            background: url('img/phone.jpg') no-repeat center center;
+            background-size: contain;
+        }
+
+        .van-icon.van-icon-address {
+            background: url('img/address.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .van-icon.van-icon-code2 {
+            background: url('img/code2.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .van-icon.van-icon-company {
+            background: url('img/company.png') no-repeat center center;
+            background-size: contain;
+        }
+        .van-icon.van-icon-time2 {
+            background: url('img/time.png') no-repeat center center;
+            background-size: contain;
+        }
+        .van-field__left-icon {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="toBeGuider" v-cloak class="pad_15">
+        <!-- <img class="logo" src="img/logo_jd.png" alt=""> -->
+        <p class="tg_label zhushi ">
+            <img src="img/tip_02.png" alt="">
+            <span>快递驿站为您提供上门取件、送货上门服务</span>
+        </p>
+        <!-- 主体 -->
+        <div class="mainCont_wrap">
+            <van-tabs @click="onClick">
+                <van-tab title="送快递(送货上门)" name="pickup">
+
+                    <div class="guider_form">
+                        <van-form validate-first @failed="onFailed" @submit="onSubmit">
+                            <van-field label="" v-model="name" name="name" placeholder="请输入姓名" icon="delete"
+                                left-icon="user" :rules="[{  required: true, message: '姓名必填' }]">
+                            </van-field>
+                            <van-field label="" v-model="phone" name="phone" placeholder="请输入手机号" left-icon="phone2"
+                                :rules="[{  validator: validPhone, message: '手机号必填' }]">
+                            </van-field>
+
+                            <van-field readonly clickable name="qcomperny" :value="qcomperny" label=""
+                                left-icon="company" placeholder="请选择快递公司" @click="showPickerComperny = true"
+                                right-icon="arrow-down"
+                                :rules="[{ required:true,message:'快递公司必选',trigger:'onChange' }]">
+                            </van-field>
+                            <van-field v-if="showCode" label="" v-model="qcode" name="qcode" placeholder="请输入6位取件码"
+                                left-icon='code2' :rules="[{  validator: validCode, message: '请输入六位取件码' }]">
+                            </van-field>
+                           
+                            <van-field readonly clickable name="qtiemD" :value="qtiemD" label=""
+                                left-icon="time2" placeholder="请选择寄送时间" @click="showPickerTimeD = true"
+                                right-icon="arrow-down"
+                                :rules="[{ required:true,message:'寄送时间必选',trigger:'onChange' }]">
+                            </van-field>
+                            <van-field label="" v-model="address" name="address" placeholder="请输入具体宿舍楼及门牌号"
+                                left-icon="address" :rules="[{  required: true, message: '地址必填' }]">
+                            </van-field>
+                            <p class="tip_zhuiyi">
+                                <img src="img/zhuyi.png" alt="">
+                                <span class="zhu_s">详细地址请具体到宿舍门牌号，方便送件上门。</span>
+                            </p>
+
+
+                            <div class="posi_b">
+                                <van-button class="btn_normal gradient2 confirm_date" round block type="info"
+                                    native-type="submit" class="gradient" style="background-color: #23A4FF;">
+                                    一元送货上门
+                                </van-button>
+                            </div>
+                            <p class="tipPay">送件上门后只需支付一元服务费</p>
+                        </van-form>
+                    </div>
+                </van-tab>
+                <van-tab title="寄快递(上门收件)" name="mail">
+                    <div class="guider_form">
+                        <van-form validate-first @failed="onFailed" @submit="onSubmit">
+                            <van-field label="" v-model="name" name="name" placeholder="请输入姓名"
+                                left-icon="user"
+                                :rules="[{  required: true, message: '姓名必填' }]">
+                            </van-field>
+                            <van-field label="" v-model="phone" name="phone" placeholder="请输入手机号"
+                                left-icon="phone2"
+                                :rules="[{  validator: validPhone, message: '手机号必填' }]">
+                            </van-field>
+                            <van-field v-model="date" clearable label="" placeholder="请选择下单时间"
+                                left-icon="time2"
+                                right-icon="arrow-down" readonly="readonly" @click="showDate = true"
+                                :rules="[{ required:true,message:'时间必选',trigger:'onChange' }]">
+                            </van-field>
+                            <van-field label="" v-model="address" name="address" placeholder="请输入宿舍楼及门牌号"
+                                left-icon="address"
+                                :rules="[{  required: true, message: '地址必填' }]">
+                            </van-field>
+                            <p class="tip_zhuiyi">
+                                <img src="img/zhuyi.png" alt="">
+                                <span class="zhu_s">详细地址请具体到宿舍门牌号，方便上门取件。</span>
+                            </p>
+
+
+                            <div class="posi_b">
+                                <van-button class="btn_normal gradient confirm_date" round block type="info"
+                                    native-type="submit" class="gradient">
+                                    寄快递
+                                </van-button>
+                            </div>
+                        </van-form>
+                    </div>
+                </van-tab>
+            </van-tabs>
+        </div>
+
+
+
+
+        <!-- 提交信息 -->
+        <!-- <div class="toBeGuider_wrap">
+            <van-button round type="default" @click="postTravelerInfo" class="confirm_date">确认下单</van-button>
+        </div> -->
+        <!-- 弹出 日期选择器 -->
+        <van-popup v-model="showDate" position="bottom">
+            <van-datetime-picker v-model="currentDate" type="date" title="选择年月日" :min-date="minDate" :max-date="maxDate"
+                @cancel="showDate = false" @confirm="confirmDate"></van-datetime-picker>
+        </van-popup>
+        <!-- 弹出 快递公司选择器 -->
+        <van-popup v-model="showPickerComperny" position="bottom" title="选择快递公司">
+            <van-picker show-toolbar :columns="columns" @confirm="confirmPComperny"
+                @cancel="showPickerComperny = false"></van-picker>
+        </van-popup>
+        <!-- 弹出 下单时间 -->
+        <van-popup v-model="showPickerTimeD" position="bottom" title="选择寄送时间">
+            <van-picker show-toolbar :columns="columns_time" @confirm="confirmPTimeD"
+                @cancel="showPickerTimeD = false"></van-picker>
+        </van-popup>
+        <!-- 弹出加载中 -->
+        <van-popup v-model="showLoading" get-container="body" style="background-color: transparent;">
+            <van-loading type="spinner" color="#fff">
+            </van-loading>
+        </van-popup>
+
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.9/lib/vant.min.js"></script>
+    <script src="js/cube.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/utils.js"></script>
+
+    <script>
+        if (!window.Promise) {
+            document.write(
+                '<script src="//cdn.jsdelivr.net/npm/es6-promise@4.1.1/dist/es6-promise.min.js"><\/script><script>ES6Promise.polyfill()<\/script>'
+            )
+        }
+    </script>
+    <script>
+        let vm = new Vue({
+            el: '#toBeGuider',
+            data: {
+                activeTab: 'pickup',
+                commonURL: '',
+                showLoading: false,
+                showLoading2: false,
+                showPickerComperny: false,
+                showPickerTimeD:false,
+                columns: ['顺丰', ' 中通 ', '申通', '圆通', '百世', '韵达', '天猫', '天天', '邮政', 'EMS', '京东', '苏宁', '唯品会'],
+                columns_time:[
+                '9:00-10:30',    
+                '10:30-12:00',
+                '12:00-13:30',
+                '13:30-15:00',
+                '15:00-16:30',
+                '16:30-18:00',
+                '18:00-19:30',
+                '19:30-21:00',
+                ],
+                qcode: '',
+                qtiemD:'',
+                showCode: false,
+                qcomperny: '',
+                // 下单数据
+                name: '',
+                phone: '',
+
+                address: '',
+                date: '',
+                // 送货数据
+                name_s: '',
+                phone_s: '',
+                address_s: '',
+
+                // 日期选择器 数据列表
+                showDate: false,
+                showPicker: false,
+                minDate: new Date(2020, 0, 1),
+                maxDate: new Date(2055, 10, 1),
+                currentDate: new Date(),
+            },
+            created() {// 测试 提示
+
+                // this.tipCube();
+            },
+            mounted() {
+                this.showLoading = false;
+            },
+            methods: {
+                // tab 点击
+                onClick(name, title) {
+                    this.activeTab = name;
+                    var elements = document.getElementsByTagName("input");
+                    $(elements).attr('autocomplete', 'off');
+                },
+                onConfirm(time) {
+                    this.value = time;
+                    this.showPicker = false;
+                },
+                // 校验手机号
+                validPhone(val) {
+                    val = Number(val);
+                    return /^[1][3,4,5,7,8][0-9]{9}$/.test(val);
+                },
+                // 校验取件码
+                validCode(val) {
+                    val = this.trim(String(val));
+                    var _val = val.replace(/-/g, "");
+                    this.qcode = _val;
+                    if (_val.length == 6) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                },
+                onFailed(errorInfo) {
+                    //console.log('failed', errorInfo);
+                },
+                // 提交
+                onSubmit() {
+                    if (this.activeTab == 'mail') { //下单寄件                        
+                        this.showLoading = true;
+                        let param = {
+                            // this.commonURL
+                            url: this.commonURL + '/api/register/sendSms',
+                            data: {
+                                name: this.name,
+                                phone: this.phone,
+                                address: this.address,
+                                date: this.date,
+                            }
+                        }
+                        console.log(param.data)
+                        myAjax(param).then(data => {
+                            //成功
+                            if (data.code == '0000') {
+                                this.showLoading = false;
+                                //this.$toast('提交成功')
+                                // 请求 最新数据
+                                this.tipCube('已安排快递员上门取件');
+                            } else {
+                                this.$toast(data.msg);
+                            }
+
+                        }).catch(err => {
+
+                        })
+                    } else { //送件上门
+                        // 处理取件码的值
+                        var _qcode = this.process(this.qcode);
+                        this.showLoading = true;
+                        let param = {
+                            url: this.commonURL + '/wxpay/appPay',
+                            data: {
+                                name: this.name,
+                                phone: this.phone,
+                                address: this.address,                                
+                                give_time:this.qtiemD,
+                                code: _qcode,
+                                company: this.qcomperny,
+                                money:'100'
+                            }
+                        }
+                        console.log(param.data)
+                        myAjax(param).then(data => {
+                            //成功
+                            if (data.code == '0000') {
+
+                                this.showLoading = false;
+                                alert(JSON.stringify(data))
+                                window.location.href = data.payRequest;
+                                //this.$toast('提交成功')
+                                // 请求 最新数据
+                                // this.tipCube('已安排快递员为您送件上门');
+                            } else {
+                                this.$toast(data.msg);
+                            }
+
+                        }).catch(err => {
+
+                        })
+                    }
+                },
+                // 处理取件码
+                process(val) {
+                    if (this.trim(this.qcomperny) == '顺丰') {
+                        return String(this.phone).slice(-4);
+                    } else {
+
+                        var _arr4 = val.slice(-4);
+                        var _arr = val.split('');
+
+                        console.log(_arr4)
+                        return _arr[0] + '-' + _arr[1] + '-' + _arr4;
+                    }
+
+                },
+                // 成功提示
+                tipCube(txt) {
+                    this.$createDialog({
+                        type: 'alert',
+                        confirmBtn: {
+                            text: '我知道了',
+                            active: true
+                        }
+                    }, (createElement) => {
+                        return [
+                            createElement('div', {
+                                'class': {
+                                    'my-title': true
+                                },
+                                slot: 'title'
+                            }, [
+                                createElement('div', {
+                                    'class': {
+                                        'my-title-img': true
+                                    }
+                                }),
+                                createElement('p', txt)
+                            ]),
+                            // createElement('p', {
+                            //     'class': {
+                            //         'my-content': true
+                            //     },
+                            //     slot: 'content'
+                            // }, '价格仍按快车计算')
+                        ]
+                    }).show()
+                },
+
+                popup: function () {
+                    // 日期选择器
+                    if (!this.showDate) {
+                        this.showDate = true;
+                    } else {
+                        this.showDate = false;
+                    }
+                    // 加载中 gif
+                    if (!this.showLoading) {
+                        this.showLoading = true;
+                    } else {
+                        this.showLoading = false;
+                    }
+
+                    if (!this.showPickerComperny) {
+                        this.showPickerComperny = true;
+                    } else {
+                        this.showPickerComperny = false;
+                    }
+                },
+                // 日期 格式化
+                formatter(type, value) {
+                    if (type === 'year') {
+                        return `${value}年`;
+                    } else if (type === 'month') {
+                        return `${value}月`
+                    } else if (type === 'day') {
+                        return `${value}日`
+                    }
+                    return value;
+                },
+                // 日期 确认框
+                confirmDate(value) {
+                    var date = value;
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+                    if (m >= 1 && m <= 9) {
+                        m = "0" + m;
+                    }
+                    if (d >= 0 && d <= 9) {
+                        d = "0" + d;
+                    }
+                    var timer = date.getFullYear() + "-" + m + "-" + d
+                    this.date = timer;
+                    this.showDate = false;
+
+                },
+                // 快递公司确认框
+                confirmPComperny(value) {
+                    this.qcomperny = value;
+                    this.showPickerComperny = false;
+                    // 顺丰快递 没有取件码
+                    if (value == '顺丰') {
+                        this.showCode = false;
+                    } else {
+                        this.showCode = true;
+                    }
+                },
+                confirmPTimeD(value){
+                    this.qtiemD = value;
+                    this.showPickerTimeD = false;                                       
+                },
+                // 提交 数据
+                postTravelerInfo() {
+                    // 校验
+                    if (this.validTravelerInfo()) {
+                        // 加载中
+                        this.showLoading = true;
+                        // 创建参数对象
+                        let param = {
+
+                            url: this.commonURL + '/api/register/sendSms',
+                            data: {
+                                name: this.name,
+                                phone: this.phone,
+                                // school: this.school,
+                                address: this.address,
+                                date: this.date,
+                            }
+                        }
+                        // 异步获取后台日期数据  
+                        myAjax(param).then(data => {
+                            //成功
+                            if (data.code == '0000') {
+                                this.showLoading = false;
+                                //this.$toast('提交成功')
+                                // 请求 最新数据
+                                this.tipCube();
+                            } else {
+                                this.$toast(data.msg);
+                            }
+
+                        }).catch(err => {
+
+                        })
+                    }
+
+                },
+                // 去除空字符串
+                trim(str) { //删除左右两端的空格
+                    return str.replace(/(^\s*)|(\s*$)/g, "");
+                },
+                // 数据校验
+                validTravelerInfo() {
+                    if (!this.name) {
+                        this.$toast('请输入姓名');
+                        return false
+                    }
+                    if (!this.phone) {
+                        this.$toast('请输入手机号');
+                        return false
+                    } else {
+                        if (!
+                            /^1[3456789]\d{9}$/
+                                .test(this.phone)) {
+                            this.$toast('请输入正确的手机号');
+                            return false
+                        }
+                    }
+                    // if (!this.school) {
+                    //     this.$toast('请输入学校');
+                    //     return false
+                    // }
+                    if (!this.date) {
+                        this.$toast('请选择下单日期');
+                        return false
+                    }
+
+                    if (!this.address) {
+                        this.$toast('请输入详细地址');
+                        return false
+                    }
+
+
+
+
+                    return true
+                },
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+### 公众号配置
+APPID ：wxd468a4542f641a8b
+AppSecret:     e0dc5f9d52247ba5ad074c7a7f89510d
+
+### 商户平台配置
+
+商户ID: 	1511032731
+
+APIKEY :  gGGmKOyonqJF7WJ9VL3hGzPj6SQri7B5      
